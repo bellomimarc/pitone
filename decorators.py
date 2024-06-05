@@ -10,10 +10,10 @@ def log_elapsed(unit="s"):
     def log_elapsed_decorator(func):
         def inner():
             import datetime
-            print("log_elapsed starts")
+            # print("log_elapsed starts")
             now = datetime.datetime.now()
             func()
-            print("log_elapsed ends")
+            # print("log_elapsed ends")
 
             elapsed = datetime.datetime.now() - now
             case = {
@@ -22,7 +22,7 @@ def log_elapsed(unit="s"):
                 "m": elapsed.total_seconds() / 60,
                 "h": elapsed.total_seconds() / 3600
             }
-            print(f"Elapsed time: {case[unit]} {unit}")
+            print(f"Elapsed time {func.__name__}: {case[unit]} {unit}")
         return inner
     
     return log_elapsed_decorator
@@ -32,4 +32,5 @@ def log_elapsed(unit="s"):
 def ordinary():
     print("I am ordinary")
 
-ordinary()  
+if __name__ == '__main__':
+    ordinary()
