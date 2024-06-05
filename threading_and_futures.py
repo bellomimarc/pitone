@@ -112,10 +112,10 @@ def ioBoundPool():
 
 if __name__ == '__main__':
     ioBoundThread()
-    cpuBoundThread()
     ioBound()
-    cpuBound()
     ioBoundFutures()
-    cpuBoundFutures()
     ioBoundPool()
+    cpuBoundThread()
+    cpuBound()
+    cpuBoundFutures()
     cpuBoundPool()
