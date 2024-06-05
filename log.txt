@@ -1,0 +1,23 @@
+2024-05-29 09:39:34,940 - root - DEBUG - This is a debug message
+2024-05-29 09:39:34,940 - root - INFO - This is an info message
+2024-05-29 09:39:34,940 - root - WARNING - This is a warning message
+2024-05-29 09:39:34,940 - root - ERROR - This is an error message
+2024-05-29 09:40:45,096 - root - DEBUG - This is a debug message
+2024-05-29 09:40:45,097 - root - INFO - This is an info message
+2024-05-29 09:40:45,097 - root - WARNING - This is a warning message
+2024-05-29 09:40:45,097 - root - ERROR - This is an error message
+2024-05-30 17:30:59,018 - root - DEBUG - This is a debug message
+2024-05-30 17:30:59,018 - root - INFO - This is an info message
+2024-05-30 17:30:59,018 - root - WARNING - This is a warning message
+2024-05-30 17:30:59,018 - root - ERROR - This is an error message
+2024-05-30 17:30:59,018 - root - DEBUG - This is a debug message
+2024-05-30 17:31:20,003 - root - DEBUG - This is a debug message
+2024-05-30 17:31:20,003 - root - INFO - This is an info message
+2024-05-30 17:31:20,003 - root - WARNING - This is a warning message
+2024-05-30 17:31:20,003 - root - ERROR - This is an error message
+2024-05-30 17:31:20,003 - root - DEBUG - importing-logger.py: This is a debug message
+2024-05-30 17:31:29,888 - root - DEBUG - This is a debug message
+2024-05-30 17:31:29,888 - root - INFO - This is an info message
+2024-05-30 17:31:29,888 - root - WARNING - This is a warning message
+2024-05-30 17:31:29,888 - root - ERROR - This is an error message
+2024-05-30 17:31:29,888 - root - DEBUG - importing-logger.py: This is a debug message
