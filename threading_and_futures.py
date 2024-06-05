@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
+from multiprocessing import Pool
 import sys
 import threading
 import queue
@@ -15,7 +16,7 @@ NUMBER_OF_TASKS = int(sys.argv[2]) if len(sys.argv) > 2 else 20
 
 q = queue.Queue()
 
-def httpbin():
+def httpbin(item: int = None):
     try:
         with urlopen('http://httpbin.org/get') as response:
             pass
@@ -99,10 +100,22 @@ def cpuBoundFutures():
         for i in range(NUMBER_OF_TASKS):
             executor.submit(fibonacci, 30)
 
+@log_elapsed(unit="ms")
+def cpuBoundPool():
+    with Pool(processes=NUMBER_OF_WORKERS) as pool:
+        pool.map(fibonacci, [30] * NUMBER_OF_TASKS)
+
+@log_elapsed(unit="ms")
+def ioBoundPool():
+    with Pool(processes=NUMBER_OF_WORKERS) as pool:
+        pool.map(httpbin, [None] * NUMBER_OF_TASKS)
+
 if __name__ == '__main__':
     ioBoundThread()
     cpuBoundThread()
-    # ioBound()
-    # cpuBound()
+    ioBound()
+    cpuBound()
     ioBoundFutures()
     cpuBoundFutures()
+    ioBoundPool()
+    cpuBoundPool()
