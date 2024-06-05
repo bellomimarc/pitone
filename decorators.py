@@ -1,3 +1,7 @@
+import time
+from tracemalloc import start
+
+
 def make_pretty(func):
 
     def inner():
@@ -9,18 +13,17 @@ def log_elapsed(unit="s"):
 
     def log_elapsed_decorator(func):
         def inner():
-            import datetime
             # print("log_elapsed starts")
-            now = datetime.datetime.now()
+            start = time.time()
             func()
             # print("log_elapsed ends")
 
-            elapsed = datetime.datetime.now() - now
+            end = time.time()
+            elapsed = end - start
             case = {
-                "ms": elapsed.microseconds / 1000,
-                "s": elapsed.total_seconds(),
-                "m": elapsed.total_seconds() / 60,
-                "h": elapsed.total_seconds() / 3600
+                "s": elapsed,
+                "ms": elapsed * 1000,
+                "us": elapsed * 1000000
             }
             print(f"Elapsed time {func.__name__}: {case[unit]} {unit}")
         return inner

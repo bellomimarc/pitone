@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 import sys
 import threading
@@ -44,11 +45,11 @@ def cpuWorker():
         q.task_done()
 
 @log_elapsed(unit="ms")
-def ioBound():
+def ioBoundThread():
     # Turn-on the worker thread on worker with IO bound tasks
     ioWorkers: MutableSequence[threading.Thread] = []
     for i in range(NUMBER_OF_WORKERS):
-        t = threading.Thread(target=ioWorker, daemon=True)
+        t = threading.Thread(target=ioWorker, daemon=True, name=f"worker-{i}")
         ioWorkers.append(t)
         t.start()
 
@@ -60,11 +61,11 @@ def ioBound():
     q.join()
 
 @log_elapsed(unit="ms")
-def cpuBound():
+def cpuBoundThread():
     # Turn-on the worker thread on worker with CPU bound tasks
     cpuWorkers: MutableSequence[threading.Thread] = []
     for i in range(NUMBER_OF_WORKERS):
-        t = threading.Thread(target=cpuWorker, daemon=True)
+        t = threading.Thread(target=cpuWorker, daemon=True, name=f"worker-{i}")
         cpuWorkers.append(t)
         t.start()
 
@@ -76,6 +77,32 @@ def cpuBound():
     # until all tasks are done.
     q.join()
 
+@log_elapsed(unit="ms")
+def cpuBound():
+    for i in range(NUMBER_OF_TASKS):
+        fibonacci(30)
+
+@log_elapsed(unit="ms")
+def ioBound():
+    for i in range(NUMBER_OF_TASKS):
+        httpbin()
+
+@log_elapsed(unit="ms")
+def ioBoundFutures():
+    with ThreadPoolExecutor(max_workers=NUMBER_OF_WORKERS) as executor:
+        for i in range(NUMBER_OF_TASKS):
+            executor.submit(httpbin)
+
+@log_elapsed(unit="ms")
+def cpuBoundFutures():
+    with ThreadPoolExecutor(max_workers=NUMBER_OF_WORKERS) as executor:
+        for i in range(NUMBER_OF_TASKS):
+            executor.submit(fibonacci, 30)
+
 if __name__ == '__main__':
-    ioBound()
-    cpuBound()
+    ioBoundThread()
+    cpuBoundThread()
+    # ioBound()
+    # cpuBound()
+    ioBoundFutures()
+    cpuBoundFutures()
