@@ -2,26 +2,29 @@ import unittest
 
 class TestStringMethods(unittest.TestCase):
 
+    a = 1
+
     @classmethod
     def setUpClass(cls) -> None:
-        print(">>>>>>setUpClass")
+        print(">>>>>>setUpClass", cls.a)
         return super().setUpClass()
     
     @classmethod
     def tearDownClass(cls) -> None:
-        print(">>>>>>tearDownClass")
+        print(">>>>>>tearDownClass", cls.a)
         return super().tearDownClass()
 
     def setUp(self) -> None:
-        print(">>>>>>setUp")
+        self.a = 2
         return super().setUp()
     
     def tearDown(self) -> None:
-        print(">>>>>>tearDown")
+        self.a = 3
         return super().tearDown()
 
     def test_upper(self):
         self.assertEqual('foo'.upper(), 'FOO')
+        self.assertEqual(self.a, 2)
 
     def test_isupper(self):
         self.assertTrue('FOO'.isupper())
