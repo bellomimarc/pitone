@@ -41,5 +41,9 @@ class TestStringMethods(unittest.TestCase):
     def test_super_new_impl(self):
         pass
 
+    @unittest.expectedFailure
+    def test_fail(self):
+        self.assertEqual(1, 0, "broken")
+
 if __name__ == '__main__':
     unittest.main()
