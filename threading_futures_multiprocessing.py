@@ -1,4 +1,4 @@
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from functools import lru_cache
 from multiprocessing import Pool
 import sys
@@ -89,14 +89,26 @@ def ioBound():
         httpbin()
 
 @log_elapsed(unit="ms")
-def ioBoundFutures():
+def ioBoundThreadFutures():
     with ThreadPoolExecutor(max_workers=NUMBER_OF_WORKERS) as executor:
         for i in range(NUMBER_OF_TASKS):
             executor.submit(httpbin)
 
 @log_elapsed(unit="ms")
-def cpuBoundFutures():
+def cpuBoundThreadFutures():
     with ThreadPoolExecutor(max_workers=NUMBER_OF_WORKERS) as executor:
+        for i in range(NUMBER_OF_TASKS):
+            executor.submit(fibonacci, 30)
+
+@log_elapsed(unit="ms")
+def ioBoundProcessFutures():
+    with ProcessPoolExecutor(max_workers=NUMBER_OF_WORKERS) as executor:
+        for i in range(NUMBER_OF_TASKS):
+            executor.submit(httpbin)
+
+@log_elapsed(unit="ms")
+def cpuBoundProcessFutures():
+    with ProcessPoolExecutor(max_workers=NUMBER_OF_WORKERS) as executor:
         for i in range(NUMBER_OF_TASKS):
             executor.submit(fibonacci, 30)
 
@@ -113,9 +125,11 @@ def ioBoundPool():
 if __name__ == '__main__':
     ioBoundThread()
     ioBound()
-    ioBoundFutures()
+    ioBoundThreadFutures()
+    ioBoundProcessFutures()
     ioBoundPool()
     cpuBoundThread()
     cpuBound()
-    cpuBoundFutures()
+    cpuBoundThreadFutures()
+    cpuBoundProcessFutures()
     cpuBoundPool()
