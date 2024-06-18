@@ -1,11 +1,8 @@
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
-from functools import lru_cache
 from multiprocessing import Pool
 import sys
 import threading
 import queue
-from time import sleep
-from token import NUMBER
 from typing import MutableSequence
 from urllib.request import urlopen
 
@@ -18,14 +15,14 @@ q = queue.Queue()
 
 def httpbin(item: int = None):
     try:
-        with urlopen('http://httpbin.org/get') as response:
+        with urlopen('http://httpbin.org/get') as _:
             pass
-    except Exception as e:
+    except Exception as _:
         pass
 
 def ioWorker():
     while True:
-        item = q.get()
+        _ = q.get()
         # print(f'Working on {item}')
         httpbin()
         # print(f'Finished {item}')
@@ -39,7 +36,7 @@ def fibonacci(n: int) -> int:
 
 def cpuWorker():
     while True:
-        item = q.get()
+        _ = q.get()
         # print(f'Working on {item}')
         fibonacci(30)
         # print(f'Finished {item}')

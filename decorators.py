@@ -1,6 +1,4 @@
 import time
-from tracemalloc import start
-
 
 def make_pretty(func):
 

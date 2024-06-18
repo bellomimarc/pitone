@@ -1,14 +1,14 @@
 
-l = [1,2,3,4,5,6,7,8,9,10,0]
-print("Sorted List: ", sorted(l))
-print("Original List: ", l)
-l.sort()
-print("Sorted List with .sort: ", l)
-print("Reversed List: ", sorted(l, reverse=True))
+list = [1,2,3,4,5,6,7,8,9,10,0]
+print("Sorted List: ", sorted(list))
+print("Original List: ", list)
+list.sort()
+print("Sorted List with .sort: ", list)
+print("Reversed List: ", sorted(list, reverse=True))
 
-m = { "a": 1, "b": 2, "zzz": 3, "d": 4, "e": 5}
-print("Sort map by key: ", sorted(m, key=lambda x: x))
-print("Sort map by value: ", sorted(m, key=lambda x: m[x]))
+map = { "a": 1, "b": 2, "zzz": 3, "d": 4, "e": 5}
+print("Sort map by key: ", sorted(map, key=lambda x: x))
+print("Sort map by value: ", sorted(map, key=lambda x: map[x]))
 
 print("Sort strings: ", sorted("This is a test string from Andrew"))
 

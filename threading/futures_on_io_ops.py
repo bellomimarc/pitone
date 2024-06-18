@@ -13,7 +13,7 @@ def io2():
     try:
         with urlopen('http://httpbin.org/get') as response:
             return response.read()
-    except Exception as e:
+    except Exception as _:
         pass
 
 def io3():
