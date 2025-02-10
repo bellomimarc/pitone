@@ -1,11 +1,13 @@
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from multiprocessing import Pool
+import os
 import sys
 import threading
 import queue
 from typing import MutableSequence
 from urllib.request import urlopen
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from decorators import log_elapsed
 
 NUMBER_OF_WORKERS = int(sys.argv[1]) if len(sys.argv) > 1 else 5
@@ -120,13 +122,13 @@ def ioBoundPool():
         pool.map(httpbin, [None] * NUMBER_OF_TASKS)
 
 if __name__ == '__main__':
-    ioBoundThread()
     ioBound()
+    ioBoundThread()
     ioBoundThreadFutures()
     ioBoundProcessFutures()
     ioBoundPool()
-    cpuBoundThread()
     cpuBound()
+    cpuBoundThread()
     cpuBoundThreadFutures()
     cpuBoundProcessFutures()
     cpuBoundPool()
