@@ -13,6 +13,9 @@ from decorators import log_elapsed
 NUMBER_OF_WORKERS = int(sys.argv[1]) if len(sys.argv) > 1 else 5
 NUMBER_OF_TASKS = int(sys.argv[2]) if len(sys.argv) > 2 else 20
 
+print(f"Number of workers: {NUMBER_OF_WORKERS}")
+print(f"Number of tasks: {NUMBER_OF_TASKS}")
+
 q = queue.Queue()
 
 def httpbin(item: int = None):
